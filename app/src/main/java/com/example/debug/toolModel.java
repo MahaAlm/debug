@@ -27,7 +27,6 @@ public class toolModel {
 
 
     public int getId(){return id;}
-
     public int getRate() {
         return rate;
     }
@@ -48,41 +47,27 @@ public class toolModel {
         return model;
     }
 
-    public void setModel(String model) {
-        this.model = model;
-    }
 
     public String getOverview() {
         return overview;
     }
 
-    public void setOverview(String overview) {
-        this.overview = overview;
-    }
+
 
     public int getCost() {
         return cost;
     }
 
-    public void setCost(int cost) {
-        this.cost = cost;
-    }
 
     public String getProdYear() {
         return prodYear;
     }
 
-    public void setProdYear(String prodYear) {
-        this.prodYear = prodYear;
-    }
 
     public int getRateNum() {
         return rateNum;
     }
 
-    public void setRateNum(int rateNum) {
-        this.rateNum = rateNum;
-    }
 
     @Override
     public String toString() {

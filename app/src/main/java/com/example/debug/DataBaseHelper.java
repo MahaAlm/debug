@@ -88,15 +88,15 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return false;
     }
 
-    public boolean addOne(toolModel toolModel, String ue){
+    public boolean addOne(toolModel toolmodel, String ue){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv =new ContentValues();
         cv.put(COLUMN_RATE,0);
-        cv.put(COLUMN_NAME,toolModel.getName());
-        cv.put(COLUMN_MODEL,toolModel.getModel());
-        cv.put(COLUMN_OVERVIEW,toolModel.getOverview());
-        cv.put(COLUMN_COST,toolModel.getCost());
-        cv.put(COLUMN_PRODUCTION,toolModel.getProdYear());
+        cv.put(COLUMN_NAME,toolmodel.getName());
+        cv.put(COLUMN_MODEL,toolmodel.getModel());
+        cv.put(COLUMN_OVERVIEW,toolmodel.getOverview());
+        cv.put(COLUMN_COST,toolmodel.getCost());
+        cv.put(COLUMN_PRODUCTION,toolmodel.getProdYear());
         cv.put(COLUMN_RATENUM,0);
         cv.put(COLUMN, ue);
         long insert = db.insert(TOOL_TABLE, null, cv);
@@ -105,69 +105,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
 
 
-    public List<toolModel> getEveryone(){
 
-        List<toolModel> returnList=new ArrayList<>();
-        String quString="SELECT * FROM "+ TOOL_TABLE;
-        SQLiteDatabase db=this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(quString,null);
-        if (cursor.moveToFirst()){
-            do{
-                int toolID=cursor.getInt(0);
-                int toolRate=cursor.getInt(1);
-                String toolName=cursor.getString(2);
-                String toolModel=cursor.getString(3);
-                String tooloverview=cursor.getString(4);
-                int toolCost =Integer.parseInt(cursor.getString(5));
-                String toolProd=cursor.getString(6);
-                int toolRateNum=cursor.getInt(7);
-                String UserName=cursor.getString(8);
 
-                toolModel newTool=new toolModel(toolID,toolRate,toolName,toolModel,tooloverview,toolCost,toolProd,toolRateNum,UserName);
-                returnList.add(newTool);
-
-            }while (cursor.moveToNext());
-        }else {
-
-        }
-        cursor.close();
-        db.close();
-
-        return returnList;
-    }
-/*
-    // we can use this method to show the user's vehicles (he offer it for rent)
-    public List<toolModel> getEveryone(){
-        List<toolModel> returnList = new ArrayList<>();
-        // get data from database
-        String queryString = "SELECT * FROM " + TOOL_TABLE + " v JOIN " + TABLENAME + " u ON v." + COL3 + " = u." + COL1 + " WHERE u." + COL1 + " = ?";
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(queryString, null);
-        if(cursor.moveToFirst()){
-            // loop through cursor results
-            do{
-                int toolID=cursor.getInt(0);
-                int toolRate=cursor.getInt(1);
-                String toolName=cursor.getString(2);
-                String toolModel=cursor.getString(3);
-                String tooloverview=cursor.getString(4);
-                int toolCost = Integer.parseInt(cursor.getString(5));
-                String toolProd=cursor.getString(6);
-                int toolRateNum=cursor.getInt(7);
-                byte[] photoData=cursor.getBlob(8);
-
-                toolModel newTool=new toolModel(toolID,toolRate,toolName,toolModel,tooloverview,toolCost,toolProd,toolRateNum, photoData);
-                returnList.add(newTool);
-            }while (cursor.moveToNext());
-        } else{
-            // nothing happens. no one is added.
-        }
-        //close
-        cursor.close();
-        db.close();
-        return returnList;
-    }
-*/
 
     public boolean DeleteOne(int id){
         SQLiteDatabase db = this.getWritableDatabase();
@@ -191,17 +130,3 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
 
 }
-/*
-    public Boolean checkEmail(String email) {
-        SQLiteDatabase MyDB = this.getWritableDatabase();
-        Cursor cursor = MyDB.rawQuery("Select * from " + TABLENAME + " where " + COL1 + " = ?", new String[]{email});
-        if (cursor.getCount() > 0) return true;
-        return false;
-    }
-
-    public Boolean checkEmailPassword(String email, String password) {
-        SQLiteDatabase MyDB = this.getWritableDatabase();
-        Cursor cursor = MyDB.rawQuery("Select * from " + TABLENAME + " where " + COL1 + " = ? and " + COL2 + " = ?", new String[]{email, password});
-        if (cursor.getCount() > 0) return true;
-        return false;
-    }*/

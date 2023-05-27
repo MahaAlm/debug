@@ -8,15 +8,27 @@
     android:orientation="vertical"
     android:background="@drawable/background1">
 
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview"
+        android:layout_width="405dp"
+        android:layout_height="497dp"
+        android:layout_marginBottom="52dp"
+        app:layout_constraintBottom_toTopOf="@+id/delete"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:listitem="@layout/display" />
+
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="68dp"
+        android:layout_width="157dp"
+        android:layout_height="91dp"
         android:layout_marginEnd="4dp"
         android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
 
         <ImageView
             android:id="@+id/homeicons"
@@ -30,45 +42,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.225"
             app:srcCompat="@drawable/home" />
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="65dp"
-            android:layout_height="70dp"
-            android:layout_margin="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.546"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.248"
-            app:srcCompat="@drawable/cart" />
-
-        <ImageView
-            android:id="@+id/listicon"
-            android:layout_width="65dp"
-            android:layout_height="70dp"
-            android:layout_margin="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.603"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.025"
-            app:srcCompat="@drawable/offer" />
-
-        <ImageView
-            android:id="@+id/addicon"
-            android:layout_width="65dp"
-            android:layout_height="70dp"
-            android:layout_margin="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.951"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.025"
-            app:srcCompat="@drawable/add" />
 
         <ImageView
             android:id="@+id/imageView3"
@@ -85,27 +58,17 @@
 
     </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerview"
-        android:layout_width="405dp"
-        android:layout_height="497dp"
-        app:layout_constraintBottom_toTopOf="@+id/delete"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="1.0"
-        tools:listitem="@layout/display" />
-
     <ImageView
         android:id="@+id/delete"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_width="100dp"
+        android:layout_height="85dp"
         android:layout_gravity="bottom"
+        android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.437"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/baseline_delete_24" />
+        app:srcCompat="@drawable/trash" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
