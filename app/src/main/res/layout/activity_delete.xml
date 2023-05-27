@@ -4,15 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Delete">
+    tools:context=".Delete"
+    android:background="@drawable/background1">
 
     <EditText
         android:id="@+id/Item_id"
         android:layout_width="295dp"
         android:layout_height="54dp"
         android:ems="10"
+        android:hint="ID"
         android:inputType="text"
-        android:text="ID"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -25,8 +26,8 @@
         android:layout_width="293dp"
         android:layout_height="65dp"
         android:ems="10"
+        android:hint="Username"
         android:inputType="text"
-        android:text="Username"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
@@ -38,7 +39,8 @@
         android:id="@+id/sub_delete"
         android:layout_width="127dp"
         android:layout_height="63dp"
-        android:text="Button"
+        android:background="@drawable/rounded_corner"
+        android:text="Delete"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
