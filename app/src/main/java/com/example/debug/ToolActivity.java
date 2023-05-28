@@ -12,16 +12,17 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class ToolActivity extends AppCompatActivity {
+public class ToolActivity extends AppCompatActivity implements SelectListener{
 
     ImageView homeicon;
 
-    ImageView addicon;
     ImageView btnDelete;
     ImageView logouticon;
     RecyclerView recyclerView;
@@ -48,10 +49,6 @@ public class ToolActivity extends AppCompatActivity {
                 startActivity(new Intent(ToolActivity.this, HomeActivity.class));
             }
         });
-
-
-
-
 
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -89,30 +86,19 @@ btnDelete.setOnClickListener(new View.OnClickListener() {
     }
 });
 
-
-
-
-
-
-
-
-
         DB = new DataBaseHelper(this);
         name = new ArrayList<>();
         rate = new ArrayList<>();
 
         id=new ArrayList<>();
         recyclerView = findViewById(R.id.recyclerview);
-        adapter = new MyAdapter(this, name, rate,id);
+        adapter = new MyAdapter(this, name, rate,id,this);
         recyclerView.setAdapter(adapter);
         GridLayoutManager gridLayoutManager= new GridLayoutManager(this,2,LinearLayoutManager.VERTICAL,false);
 
         recyclerView.setLayoutManager(gridLayoutManager);
         displaydata();
-
-
-    }
-
+}
 
 
     private void displaydata() {
@@ -125,11 +111,15 @@ btnDelete.setOnClickListener(new View.OnClickListener() {
                     id.add(cursor.getString(0));
                     name.add(cursor.getString(1));
                     rate.add("Rate: "+cursor.getString(2));
-
-
-
                 }
 
             }
         }
+    @Override
+    public void onItemClicked(int model) {
+        toolModel selected_tool;
+        Intent intent=new Intent(ToolActivity.this, details.class);
+        intent.putExtra("id",model);
+        startActivity(intent);
     }
+}

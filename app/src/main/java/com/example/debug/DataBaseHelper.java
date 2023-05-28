@@ -1,6 +1,7 @@
 package com.example.debug;
 
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -28,6 +29,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public static final String COL2 = "password";
 
 
+    public static final String IT_I = "username";
+    public static final String IT_ = "password";
+
+
+
     public DataBaseHelper(@Nullable Context context) {
 
         super(context, "tool.db", null, 1);
@@ -48,6 +54,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 + COLUMN + " TEXT, "
                 + "FOREIGN KEY(" + COLUMN + ") REFERENCES " + TABLENAME + "(" + COL1 + ")"
                 + ")";
+
+        String RentTable="";
+
         db.execSQL("create Table " + TABLENAME + "(" + COL1 + " TEXT primary key, " + COL2 + " TEXT)");
         db.execSQL(createTableStatement);
     }
@@ -103,7 +112,33 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return insert != -1;
     }
 
+    public Cursor getOne(int id){
+        SQLiteDatabase DB = this.getWritableDatabase();
+        Cursor cursor = DB.rawQuery("Select * from TOOL_TABLE Where id="+id, null);
+        return cursor;
 
+
+/*
+        SQLiteDatabase db=this.getWritableDatabase();
+        String select_query="SELECT * FROM TOOL_TABLE  WHERE id= 4";
+        Cursor cursor= db.rawQuery(select_query,null);
+        toolModel tool=null;
+   if (cursor.moveToFirst()){
+       @SuppressLint("Range") int id_tool=cursor.getInt(cursor.getColumnIndex(COLUMN_ID));
+       @SuppressLint("Range") String name_tool=cursor.getString(cursor.getColumnIndex(COLUMN_NAME));
+       @SuppressLint("Range") String model_tool=cursor.getString(cursor.getColumnIndex(COLUMN_MODEL));
+       @SuppressLint("Range") String overview_tool=cursor.getString(cursor.getColumnIndex(COLUMN_OVERVIEW));
+       @SuppressLint("Range") int cost_tool=cursor.getInt(cursor.getColumnIndex(COLUMN_COST));
+       @SuppressLint("Range") int rate_tool=cursor.getInt(cursor.getColumnIndex(COLUMN_RATE));
+       @SuppressLint("Range") int ratenum_tool=cursor.getInt(cursor.getColumnIndex(COLUMN_RATENUM));
+       @SuppressLint("Range") String prod_tool=cursor.getString(cursor.getColumnIndex(COLUMN_PRODUCTION));
+       @SuppressLint("Range") String user_tool=cursor.getString(cursor.getColumnIndex(COLUMN));
+
+       tool=new toolModel(id_tool,rate_tool,name_tool,model_tool,overview_tool,cost_tool,prod_tool,ratenum_tool,user_tool);
+   }
+   return tool;*/
+
+    }
 
 
 
