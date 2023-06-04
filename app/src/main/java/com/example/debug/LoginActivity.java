@@ -16,8 +16,10 @@ public class LoginActivity extends AppCompatActivity {
     Button signin, log;
     DataBaseHelper DB;
 
+
     @SuppressLint("MissingInflatedId")
     @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
@@ -31,7 +33,7 @@ public class LoginActivity extends AppCompatActivity {
         signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String user = username.getText().toString();
+                 String user = username.getText().toString();
                 String pass = password.getText().toString();
 
                 if(user.equals("")||pass.equals(""))
@@ -41,6 +43,7 @@ public class LoginActivity extends AppCompatActivity {
                     if (check){
                         Toast.makeText(LoginActivity.this, "Sign in successfully", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(getApplicationContext(),HomeActivity.class);
+                        intent.putExtra("name",user);
                         startActivity(intent);
                     } else {
                         Toast.makeText(LoginActivity.this, "Invalid Credentials", Toast.LENGTH_SHORT).show();
@@ -58,4 +61,8 @@ public class LoginActivity extends AppCompatActivity {
         });
 
     }
+
+
+
+
 }

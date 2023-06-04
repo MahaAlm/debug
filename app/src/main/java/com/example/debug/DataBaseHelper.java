@@ -1,6 +1,7 @@
 package com.example.debug;
 
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -28,6 +29,12 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public static final String COL2 = "password";
 
 
+    public static final String TABLERENT = "RENT";
+    public static final String IT_renter = "renter";
+    public static final String IT_ID = "ID";
+
+
+
     public DataBaseHelper(@Nullable Context context) {
 
         super(context, "tool.db", null, 1);
@@ -48,8 +55,15 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 + COLUMN + " TEXT, "
                 + "FOREIGN KEY(" + COLUMN + ") REFERENCES " + TABLENAME + "(" + COL1 + ")"
                 + ")";
+
+
+        db.execSQL("create Table " + TABLERENT + "(" + IT_ID + " INTEGER primary key, " +IT_renter+ " TEXT "+ ")" );
+
         db.execSQL("create Table " + TABLENAME + "(" + COL1 + " TEXT primary key, " + COL2 + " TEXT)");
         db.execSQL(createTableStatement);
+
+
+
     }
 
     @Override
@@ -68,7 +82,25 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
 
+    public Boolean getRdata(String name,int id) {
+        SQLiteDatabase MyDB = this.getWritableDatabase();
+        Cursor cursor = MyDB.rawQuery("Select * from " + TABLERENT + " where " + IT_renter + " = ? AND ID = ?", new String[]{name,String.valueOf(id)});
+        if (cursor.getCount() > 0) return true;
+        return false;
+    }
 
+    public Boolean getRdata2(String name,int id) {
+        SQLiteDatabase MyDB = this.getWritableDatabase();
+        Cursor cursor = MyDB.rawQuery("Select * from " + TOOL_TABLE + " where " + COLUMN + " = ? AND ID = ?", new String[]{name,String.valueOf(id)});
+        if (cursor.getCount() > 0) return true;
+        return false;
+    }
+    public Boolean checkRented(int id) {
+        SQLiteDatabase MyDB = this.getWritableDatabase();
+        Cursor cursor = MyDB.rawQuery("Select * from " + TABLERENT + " where " + IT_ID + " = ?", new String[]{String.valueOf(id)});
+        if (cursor.getCount() > 0) return true;
+        return false;
+    }
     public Boolean checkUsername(String username) {
         SQLiteDatabase MyDB = this.getWritableDatabase();
         Cursor cursor = MyDB.rawQuery("Select * from " + TABLENAME + " where " + COL1 + " = ?", new String[]{username});
@@ -103,7 +135,33 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return insert != -1;
     }
 
+    public boolean addToRent(int id, String ue){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv =new ContentValues();
+        cv.put(IT_ID,id);
+        cv.put(IT_renter,ue);
+        long insert = db.insert(TABLERENT, null, cv);
+        return insert != -1;
+    }
 
+    public boolean deleteFromRent(int id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String queryString= "Delete From " + TABLERENT + " WHERE " + IT_ID + " = " + id ;
+        Cursor cursor = db.rawQuery(queryString, null);
+        if(cursor.moveToFirst()){
+            return true;
+        } else{
+            // nothing happens. no one is added.
+            return false;
+        }
+        //close
+    }
+
+    public Cursor getOne(int id){
+        SQLiteDatabase DB = this.getWritableDatabase();
+        Cursor cursor = DB.rawQuery("Select * from TOOL_TABLE Where id="+id, null);
+        return cursor;
+    }
 
 
 

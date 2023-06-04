@@ -26,11 +26,17 @@ public class AddActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
 
+
+
+        String namm=getIntent().getStringExtra("name");
+
         home = (ImageView) findViewById(R.id.homeicons);
         home.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(AddActivity.this, HomeActivity.class));
+                Intent intent=new Intent(AddActivity.this, HomeActivity.class);
+                intent.putExtra("name",namm);
+                startActivity(intent);
             }
         });
 
@@ -113,6 +119,7 @@ public class AddActivity extends AppCompatActivity {
                                 public void onClick(DialogInterface dialogInterface, int i) {
 
                                     Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                                    intent.putExtra("name",namm);
                                     startActivity(intent);
                                 }
                             });
